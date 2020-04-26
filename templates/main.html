@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+
+	<title>Main page</title>
+</head>
+<body>
+	<h1 class="text-center mt-5 text-white">Are you bored? We all are.</h1>
+	<h1 class="text-center mt-2 mb-5 text-white">Time to move your ass!</h1>
+
+	<div class="d-flex justify-content-center">
+		<!-- Options as a form -->
+		<div class="content-section mx-4 pt-3">
+			<form method="POST" action="">
+				{{ form.hidden_tag() }}
+				<fieldset class="form-group text-white">
+					<div class="form-group">
+						{{ form.participants.label(class="form-control-label") }} (<span id="people-indicator">1</span>)
+						{{ form.participants(class="form-control-range form-control-lg", min="1", max="5", id="input-range") }}
+					</div>
+					<div class="form-group text-center">
+						{{ form.submit(class="btn btn-outline-light btn-lg") }}
+					</div>
+				</fieldset>
+			</form>
+		</div>
+
+		<!-- Where the ideas pop as cards -->
+		<div class="card bg-{{ result.color }} text-white mx-4" style="width: 20rem;">
+		  <img src="{{ result.image_file }}" class="card-img-top" alt="...">
+		  <div class="card-body text-center align-middle">
+		    <h5 class="card-title">{{ result.activity }}</h5>
+		    <p class="card-text">Number of participants: {{ result.participants }}</p>
+		    {% if result.link %}
+		    	<a href="{{ result.link }}" class="btn btn-outline-light btn-sm">Check website</a>
+		    {% endif %}
+		  </div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="/static/js/script.js"></script>
+</body>
+</html>
